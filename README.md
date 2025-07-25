@@ -1,3 +1,6 @@
+# server-monitoring
+This project is aimed at building a user interface (built with Angular v18.2.3) that can likely be used for server monitoring — server status, checking traffic stats and support tickets
+
 # CmpDeepDive
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.0-next.2.
