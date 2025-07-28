@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  output,
   viewChild,
   ViewChild,
 } from '@angular/core';
@@ -18,21 +19,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class NewTicketComponent implements AfterViewInit {
   @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
-
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
+  add = output<{ title: string; text: string }>();
 
-  ngOnInit(){
+  ngOnInit() {
     console.log('ONINIT');
     console.log(this.form?.nativeElement);
   }
   ngAfterViewInit(): void {
-      console.log('AFTER VIEW INIT');
-      console.log(this.form?.nativeElement)
+    console.log('AFTER VIEW INIT');
+    console.log(this.form?.nativeElement);
   }
 
   onSubmit(title: string, ticketText: string) {
-    console.log(title);
-    console.log(ticketText);
+    // console.log(title);
+    // console.log(ticketText);
+    this.add.emit({ title: title, text: ticketText });
     this.form?.nativeElement.reset();
   }
 }
