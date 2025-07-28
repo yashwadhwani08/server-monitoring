@@ -1,4 +1,5 @@
 import {
+  AfterContentInit,
   Component,
   contentChild,
   ContentChild,
@@ -22,7 +23,7 @@ import {
     '(click)': 'onClick()',
   },
 })
-export class ControlComponent {
+export class ControlComponent implements AfterContentInit {
   // @HostBinding('class') className = 'control';
   // @HostListener('click') onClick() {
   //   console.log('Clciked');
@@ -30,11 +31,18 @@ export class ControlComponent {
   label = input.required<string>();
   private el = inject(ElementRef);
   // @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>
+  private control =
+    contentChild<ElementRef<HTMLInputElement | HTMLFormElement>>('input');
 
-  private control = contentChild<ElementRef<HTMLInputElement | HTMLFormElement>>('input')
+  ngAfterContentInit(): void {
+    console.log(
+      'Used when some function needs to be triggered after the projected content is initialised'
+    );
+  }
+
   onClick() {
     console.log('Clicked');
     console.log(this.el);
-    console.log(this.control())
+    console.log(this.control());
   }
 }
