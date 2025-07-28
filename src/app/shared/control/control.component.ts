@@ -1,5 +1,7 @@
 import {
   AfterContentInit,
+  afterNextRender,
+  afterRender,
   Component,
   contentChild,
   ContentChild,
@@ -34,6 +36,17 @@ export class ControlComponent implements AfterContentInit {
   private control =
     contentChild<ElementRef<HTMLInputElement | HTMLFormElement>>('input');
 
+  constructor() {
+    afterRender(()=>{
+      console.log('afterRender used for executing some function after any changes are made in the application anywhere, not only limited to this component');
+    })
+
+    afterNextRender(()=>{
+      console.log("Use afterNextRender for one-time DOM operations after the initial render.")
+    })
+    
+  }
+  
   ngAfterContentInit(): void {
     console.log(
       'Used when some function needs to be triggered after the projected content is initialised'
